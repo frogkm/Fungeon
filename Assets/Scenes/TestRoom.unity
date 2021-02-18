@@ -849,9 +849,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   transform: {fileID: 0}
   speed: 5
-  mousePosition: {x: 0, y: 0, z: 0}
   bullet: {fileID: 8964294929310268665, guid: fdf368181a2fa4e91888f074cb5a087f, type: 3}
-  bulletSpeed: 5
+  bulletSpeed: 10
 --- !u!50 &1821087174
 Rigidbody2D:
   serializedVersion: 4

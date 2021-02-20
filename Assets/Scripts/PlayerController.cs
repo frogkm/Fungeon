@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour
   void shootBullet(){
     GameObject e = Instantiate(bullet) as GameObject;
     Physics2D.IgnoreCollision(e.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+
+
     e.transform.position = transform.position;
     Rigidbody2D bulletRb = e.GetComponent<Rigidbody2D>();
     angle = transform.eulerAngles.z;

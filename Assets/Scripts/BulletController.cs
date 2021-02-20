@@ -6,7 +6,20 @@ public class BulletController : MonoBehaviour {
   public int damage;
 
   private void OnTriggerEnter2D(Collider2D other) {
-    Destroy(this.gameObject, 0.05f);
+    if (other.gameObject.tag == "PlayerBullet" || other.gameObject.tag == "EnemyBullet"){
+
+    }
+    else if (this.gameObject.tag == "PlayerBullet" && other.gameObject.tag == "Enemy"){
+      EnemyController controller = other.GetComponent<EnemyController>();
+      controller.setHealth(controller.getHealth() - damage);
+      Destroy(this.gameObject, 0.05f);
+    }
+    else{
+      Destroy(this.gameObject, 0.05f);
+    }
+
+
+
   }
 
 }

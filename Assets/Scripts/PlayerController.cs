@@ -29,12 +29,12 @@ public class PlayerController : MonoBehaviour
     rb = GetComponent<Rigidbody2D>();
   }
 
-  //Rotates the transform's z plane to point it towards position
   void lookAt(Transform transform, Vector3 position){
-    position = Camera.main.ScreenToWorldPoint(position);
-    Quaternion rot = Quaternion.LookRotation(transform.position - position, Vector3.forward);
-    transform.rotation = rot;
-    transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
+    float rotateSpeed = 20f;
+    Vector2 direction = Camera.main.ScreenToWorldPoint(position) - transform.position;
+    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotateSpeed * Time.deltaTime);
   }
 
   void setMovement(Rigidbody2D rb){
@@ -66,8 +66,9 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D bulletRb = e.GetComponent<Rigidbody2D>();
     angle = transform.eulerAngles.z;
 
-    angle = angle + 90;
+    //angle = angle + 90;
     angle = (angle * (float)(Math.PI)) / 180;
+
 
     bulletYVel = bulletSpeed * (float)Math.Sin(angle);
     bulletXVel = bulletSpeed * (float)Math.Cos(angle);
@@ -81,6 +82,7 @@ public class PlayerController : MonoBehaviour
     //Debug.LogFormat("{0} trigger enter: {1}", this, this);
     counter += Time.deltaTime;
     setMovement(rb);
+    //lookAt(transform, Input.mousePosition);
     lookAt(transform, Input.mousePosition);
     if (Input.GetKey(KeyCode.Mouse0) && counter >= secondsPerShot){
       counter = 0f;

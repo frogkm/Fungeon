@@ -1,38 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class EnemyController : MonoBehaviour
-{
-  public int maxHealth;
-  public int health;
+[RequireComponent(typeof(LivingThing))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PathFinder))]
+public class EnemyController : MonoBehaviour {
 
-    public void setHealth(int newHealth){
-      health = newHealth;
-    }
+    [SerializeField] private float sightRadius;
+    [SerializeField] private GameObject target;
 
-    public int getHealth(){
-      return health;
-    }
+    private LivingThing livingThing;
+    private Rigidbody2D rigidBody;
+    private PathFinder pathFinder;
 
-    void checkDeath(){
-      if (health <= 0){
-        Destroy(this.gameObject, 0f);
-      }
+    private State state;
+    private bool shouldLookAt;
+
+    enum State {
+      Wandering,
+      Attacking,
+      Retreating
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-      health = maxHealth;
-
-
+    void Start() {
+      livingThing = GetComponent<LivingThing>();
+      rigidBody = GetComponent<Rigidbody2D>();
+      pathFinder = GetComponent<PathFinder>();
+      shouldLookAt = false;
+      state = State.Wandering;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-      checkDeath();
+    void Update() {
+      shouldLookAt = targetInRadius();
+    }
 
+    void FixedUpdate() {
+      if (shouldLookAt) {
+        livingThing.lookAt(target.GetComponent<Transform>().position);
+      }
+    }
+
+    private bool targetInRadius() {
+      return pathFinder.inRadius(target.GetComponent<Transform>().position, sightRadius);
     }
 }

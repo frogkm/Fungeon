@@ -6,7 +6,7 @@ using System;
 public class ShotGunController : WeaponController {
 
     [SerializeField] private int spreadCount;
-    [SerializeField] private int spreadDensity;
+    [SerializeField] private int spread;
     System.Random r = new System.Random();
 
     private void shootAt(float inc) {
@@ -24,7 +24,7 @@ public class ShotGunController : WeaponController {
 
     protected override void shoot() {
         for (int i = 0; i < spreadCount; i++){
-            shootAt((float)r.Next(-spreadDensity / 2, spreadDensity / 2));
+            shootAt((float)r.Next(-spread / 2, spread / 2));
         }
 
     }

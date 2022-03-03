@@ -160,8 +160,7 @@ MonoBehaviour:
   bulletSpeed: 10
   bullet: {fileID: 7411242079907736320, guid: fc52acc2df99dc903a86576bf3a7e0e9, type: 3}
   bulletSpawnPoint: {fileID: 7737961227221226928}
-  holdPivotPoint: {fileID: 650146513730138970}
   automatic: 0
   damage: 5
   spreadCount: 4
-  spreadDensity: 15
+  spread: 20

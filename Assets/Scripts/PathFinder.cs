@@ -21,10 +21,10 @@ public class PathFinder : MonoBehaviour
         goingSomewhere = false;
         backlog = new Queue();
 
-        enqueuePlace(new Vector3(transform.position.x - 3f, transform.position.y - 3f, 0));
-        enqueuePlace(new Vector3(transform.position.x, transform.position.y, 0));
-        enqueuePlace(new Vector3(transform.position.x + 4f, transform.position.y - 3f, 0));
-        enqueuePlace(new Vector3(transform.position.x - 4f, transform.position.y + 3f, 0));
+        //enqueuePlace(new Vector3(transform.position.x - 3f, transform.position.y - 3f, 0));
+        //enqueuePlace(new Vector3(transform.position.x, transform.position.y, 0));
+        //enqueuePlace(new Vector3(transform.position.x + 4f, transform.position.y - 3f, 0));
+        //enqueuePlace(new Vector3(transform.position.x - 4f, transform.position.y + 3f, 0));
     }
 
     void Update() {
@@ -39,8 +39,7 @@ public class PathFinder : MonoBehaviour
     }
 
     private void checkArrived() {
-        if (inRadius(destination, 0.25f)) {
-            Debug.Log("MADE IT");
+        if (inRadius(destination, 0.1f)) {
             //transform.position = destination;
             rigidBody.velocity = new Vector3(0, 0, 0);
             if (backlog.Count > 0) {
@@ -71,25 +70,8 @@ public class PathFinder : MonoBehaviour
     }
 
     private void adjustMovement() {
-      //Debug.Log("Adjusting movement");
       Vector3 direction = destination - transform.position;
-
-
-      //double angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-      //float x = (float)Math.Cos(angle) * moveSpeed;
-      //float y = (float)Math.Sin(angle) * moveSpeed;
       rigidBody.velocity = direction.normalized * moveSpeed;
-      //rigidBody.velocity = new Vector3(x, y, 0);
-      /*
-      if(Mathf.Abs(direction.magnitude) < (new Vector3(x, y, 0)).magnitude * Time.deltaTime) {
-        transform.position = destination;
-      }
-      else {
-        rigidBody.velocity = new Vector3(x, y, 0);
-      }
-      */
-
-
     }
 
     private float getRandAngle(){
@@ -100,6 +82,8 @@ public class PathFinder : MonoBehaviour
         float dis = Vector3.Distance(position, transform.position);
         return (radius >= dis);
     }
+
+
 
 
 }

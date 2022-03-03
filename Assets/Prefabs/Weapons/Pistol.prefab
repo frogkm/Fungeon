@@ -99,7 +99,6 @@ MonoBehaviour:
   bulletSpeed: 10
   bullet: {fileID: 7411242079907736320, guid: fc52acc2df99dc903a86576bf3a7e0e9, type: 3}
   bulletSpawnPoint: {fileID: 8254818302059077727}
-  holdPivotPoint: {fileID: 0}
   automatic: 0
   damage: 15
 --- !u!1 &4791130533758223209

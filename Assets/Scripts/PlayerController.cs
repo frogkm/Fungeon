@@ -9,6 +9,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     [SerializeField] private float movementSpeed;
+    [SerializeField] private Animator playerGFXAnimator;
 
     private Rigidbody2D rigidBody;
     private LivingThing livingThing;
@@ -54,6 +55,10 @@ public class PlayerController : MonoBehaviour {
             weaponHolder.tryShoot();
             triggerDownAfterShot = true;
         }
-        rigidBody.velocity = new Vector2(xInput * movementSpeed, yInput * movementSpeed);
+        rigidBody.velocity = (new Vector2(xInput, yInput)).normalized * movementSpeed;
+
+
+        playerGFXAnimator.SetBool("playerIsWalking", rigidBody.velocity.x != 0 || rigidBody.velocity.y != 0);
+
     }
 }

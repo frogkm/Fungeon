@@ -24,6 +24,7 @@ public class WeaponController : MonoBehaviour {
       canShoot = true;
       spriteRenderer = GetComponent<SpriteRenderer>();
       //pivotPoint = holdPivotPoint.position;
+      bullet.GetComponent<BulletController>().gunDamage = damage;
     }
 
 
@@ -50,6 +51,7 @@ public class WeaponController : MonoBehaviour {
 
     protected virtual void shoot() {
         GameObject e = Instantiate(bullet) as GameObject;
+        //e.GetComponent<BulletController>().setGunDamage(damage);  //I don't love this
         e.transform.position = bulletSpawnPoint.position;
         Rigidbody2D bulletRb = e.GetComponent<Rigidbody2D>();
         float angle = transform.eulerAngles.z;

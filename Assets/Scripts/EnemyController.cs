@@ -37,6 +37,11 @@ public class EnemyController : MonoBehaviour {
       shouldLookAt = targetInRadius();
     }
 
+    public void gotHit(int damage) {
+      livingThing.setHealth(livingThing.getHealth() - damage);
+
+    }
+
     void FixedUpdate() {
       if (shouldLookAt) {
         livingThing.lookAt(target.GetComponent<Transform>().position);
